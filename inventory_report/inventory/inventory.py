@@ -1,6 +1,7 @@
 import os
 import csv
 import json
+import xmltodict
 from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
 
@@ -20,12 +21,18 @@ class Inventory:
         with open(path, encoding="utf-8") as file:
             return json.load(file)
 
+    def __xml_file_reader(path):
+        with open(path, encoding="utf-8") as file:
+            return xmltodict.parse(file.read())["dataset"]["record"]
+
     def __file_reader(path):
         extension = Inventory.__file_extension(path)
         if extension == '.csv':
             return Inventory.__csv_file_reader(path)
         elif extension == '.json':
             return Inventory.__json_file_reader(path)
+        elif extension == '.xml':
+            return Inventory.__xml_file_reader(path)
 
     def import_data(path, type):
         if type == 'simples':
