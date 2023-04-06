@@ -1,12 +1,12 @@
-from abc import ABC, abstractclassmethod
+from abc import ABC, abstractmethod
 
 
 class Importer(ABC):
 
-    @abstractclassmethod
+    @abstractmethod
     def file_extension(path):
         raise NotImplementedError
 
-    @abstractclassmethod
+    @abstractmethod
     def import_data(path):
         raise NotImplementedError
